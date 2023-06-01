@@ -1,0 +1,26 @@
+@api = http://localhost:9000/oficinas
+# GET {{api}}
+# GET {{api}}/4
+# DELETE {{api}}/3
+
+
+
+POST {{api}}
+Content-Type: application/json
+
+{
+    "name": "Fiscalia id",
+    "city": "Totonicapán",
+    "address": "7 calle Zona 1",
+    "cel": "12345678"
+}
+# PUT {{api}}/4
+# Content-Type: application/json
+
+# {
+#     "name": "Fiscalia actualizado",
+#     "cel": "0000000",
+#     "status": 0,
+#     "city": "Totonicapan",
+#     "address": "2da calle zona 10"
+# }
