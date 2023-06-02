@@ -22,16 +22,17 @@ export const createCites = async (req, res) =>{
         const pool = await conectioDb();
         const transaction = new sql.Transaction(pool);
         await transaction.begin();
-    
         try {
             const citesRequest = new sql.Request(transaction);
+
             await citesRequest.input('name', sql.VarChar, name)
             .input('status', sql.Bit, 0)
             .input('user_id', sql.Int, 1)
             .query(queries.addNewCite);
-            const { recordset: [{ citeID }] } = await sql.query('SELECT SCOPE_IDENTITY() AS id;');
-          const infoRequest = new sql.Request(transaction);
-          await infoRequest.input('cite_id', sql.Int, citeID)
+            const id = await citesRequest.query("SELECT @@IDENTITY AS 'Identity'");
+            const citeID = id.recordset[0].Identity
+            const infoRequest = new sql.Request(transaction);
+          await infoRequest.input('cites_id', sql.Int, citeID)
           .input('city', sql.VarChar, city)
           .input('cel', sql.VarChar, cel)
           .input('address', sql.VarChar, address)
